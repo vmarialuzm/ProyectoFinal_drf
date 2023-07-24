@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'usuarios.apps.UsuariosConfig',
     'pagos.apps.PagosConfig',
+    'versioned_pagos.apps.VersionedPagosConfig',
 ]
 
 MIDDLEWARE = [
