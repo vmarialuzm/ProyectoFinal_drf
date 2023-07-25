@@ -10,7 +10,7 @@ from .pagination import SimplePagination
 class CreateListRetrieveViewSet(CreateModelMixin, ListModelMixin, RetrieveModelMixin,GenericViewSet):
     queryset = Pagos.objects.all()
     serializer_class = PagoSerializer
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     pagination_class = SimplePagination
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['usuario_id','fecha_pago','servicio']
