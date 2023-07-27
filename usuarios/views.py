@@ -6,7 +6,6 @@ from rest_framework.views import APIView
 from .serializers import SignUpSerializer, GetUserSerializer
 from .tokens import create_jwt_pair_for_user
 from .models import User
-import pdb
 
 class SignUpView(generics.GenericAPIView):
     serializer_class = SignUpSerializer
@@ -24,11 +23,7 @@ class SignUpView(generics.GenericAPIView):
             }
 
             return Response(data=response, status=status.HTTP_201_CREATED)
-        else:
-            # Agregar un registro detallado para obtener información sobre el error
-            pdb.set_trace()
-            print("Error en el registro:", serializer.errors)
-            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class LoginView(APIView):
     def post(self, request):
