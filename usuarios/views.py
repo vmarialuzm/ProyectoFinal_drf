@@ -44,7 +44,7 @@ class LoginView(APIView):
         
         else:
             return Response(data={
-                "message": "Correo inválido o contraseña incorrecta!"
+                "message": f"Correo inválido o contraseña incorrecta! {email} {password}"
             })
     
     def get(self, request):
