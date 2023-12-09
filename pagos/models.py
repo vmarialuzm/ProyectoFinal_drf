@@ -31,7 +31,7 @@ class PaymentUser(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     service_id = models.ForeignKey(Services, on_delete=models.CASCADE)
     amount = models.FloatField()
-    payment_date = models.DateField()
+    payment_date = models.DateField(auto_now_add=True)
     expiration_date = models.DateField()
 
     class Meta:
