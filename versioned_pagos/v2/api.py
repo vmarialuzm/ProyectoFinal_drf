@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.throttling import UserRateThrottle
 from pagos.models import Services, PaymentUser, ExpiredPayments
 from .serializers import ServicesSerializer, PaymentUserSerializer, ExpiredPaymentsSerializer
+from datetime import date
 
 class ServicesViewSet(ReadOnlyModelViewSet):
     queryset = Services.objects.all()
@@ -21,10 +22,13 @@ class PaymentUserViewSet(ModelViewSet):
     throttle_classes = [UserRateThrottle]
 
     def perform_create(self, serializer):
-        payment_date = serializer.validated_data['payment_date']
+        # payment_date = serializer.validated_data['payment_date']
         expiration_date = serializer.validated_data['expiration_date']
 
-        if payment_date > expiration_date:
+        # Accede a la fecha actual
+        current_date = date.today()
+
+        if current_date > expiration_date:
             # Calcula la penalización como el 10% del monto (amount)
             penalty_fee_amount = serializer.validated_data['amount'] * 0.10
 
